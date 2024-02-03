@@ -29,8 +29,27 @@ Details about setting up the module for database interactions.
 - Function to close the database connection
 - Query execution functions
 
-## 3. UI Components
+## 3. Utilty Files
+Utility Files needed for various functions in program.
+
+### `vehicles_lookup.py`
+- Will query the database for active vehicles and put the in an array for use in other pages dropdown menus.
+
+### `location_lookup.py`
+- Will query the database for active locations and put the in an array for use in other pages dropdown menus.
+
+### `csv.py`
+- Will handle converting mysql results to csv for download
+- In the future may handle converting csv data for import to mysql table
+
+
+## 4. UI Components
 Design and development of the user interface.
+
+### `main_window.py`
+- Encases entire program
+- Contains `sidebar.py` on the left side of window
+- Conatins `main_content_area.py` on the right side of window
 
 ### `sidebar.py`
 - Create a vertical navigation menu
@@ -39,16 +58,80 @@ Design and development of the user interface.
 ### `main_content_area.py`
 - Logic to update the content based on the selected menu item
 
-## 4. Content Area Management
+## 5. Content Area Management
 Implementation of content area loading and display logic.
 
 ### Content Area Files (`/content_areas`)
-- `products.py`
-- `orders.py`
-- `customers.py`
-- *... (and more based on the inventory sections)*
+- `parts.py`
+- `vehicles.py`
+- `locations.py`
+- `reports.py`
+- `operations.py`
 
-## 5. Modularity and Code Organization
+## 6. Individual Content Area Files Components
+Implementation of content area components loading and display logic.
+
+### Content Area Components(`/content_areas`)
+List of the components for each page that are to be build.
+
+#### `parts.py`
+- Frame with input field, submit button and treeview.
+  - Input field to accept integer
+  - Submit button will take integer and do a mysql query with following format: `select * from parts_car where 'sku' = 'parts_sku'`
+    - The variable `parts_car` will be created by taking the integer and dropping the last 3 digits and appending 'car' to the beginning, ex: 1232 == car1.
+    - The variable `parts_sku` will be the integer entered in the text field
+  -Treeview will display the results from the mysql query
+- Frame with Tabview with the following options:
+  - Add Part
+    - Will contain the following input and dropdown fields
+      - Dropdown = car_select
+      - Text box = item_name
+      - Text box = mpn
+      - Dropdown = location
+      - Text box = size
+      - Text box = weight
+      - Dropdown = quality
+      - Dropdown = status
+      - Text box = sale_price
+      - Text box = expense
+      - Text box = profit
+      - Submit button to insert the above inputs into a mysql table with "car_select" being the table name.
+  - Update Part
+    - Will contain the following input and dropdown fields
+      - Dropdown = car_select
+      - Text box = sku
+      - Text box = item_name
+      - Text box = mpn
+      - Dropdown = location
+      - Text box = size
+      - Text box = weight
+      - Dropdown = quality
+      - Dropdown = status
+      - Text box = sale_price
+      - Text box = expense
+      - Text box = profit
+      - Submit button to update the above inputs into a mysql table with "car_select" being the table name and "sku" being the primary key.
+  - Remove Part
+    - Will contain a Input Field with a submit button
+      - Text Box will accept and integer
+      - Submit button will take integer and do a mysql query with following format: `delete from parts_car where 'sku' = 'parts_sku'`
+        - The variable `parts_car` will be created by taking the integer and dropping the last 3 digits and appending 'car' to the beginning, ex: 1232 == car1.
+        - The variable `parts_sku` will be the integer entered in the text field
+
+#### `vehicles.py`
+WIP
+
+#### `locations.py`
+WIP
+
+#### `reports.py`
+WIP
+
+#### `operations.py`
+WIP
+
+
+## 7. Modularity and Code Organization
 Ensure code is organized, modular, and each `.py` file is self-contained.
 
 ### Best Practices
@@ -56,24 +139,35 @@ Ensure code is organized, modular, and each `.py` file is self-contained.
 - Ensure clear interfaces between different modules
 - Write reusable and well-documented code
 
-## 6. Development Plan
+## 8. Development Plan
 A checklist or timeline to manage the development process.
 
-### Week 1:
+### Step 1:
 - [ ] Finalize the project structure
 - [ ] Set up the database connection module
 
-### Week 2:
-- [ ] Develop the basic UI layout
-- [ ] Implement sidebar functionality
+### Step 2:
+- [ ] Develop the basic UI layout and build `main_window.py`
+- [ ] Implement sidebar functionality and build `sidebar.py`
 
-### Week 3:
-- [ ] Develop content area for `products`
-- [ ] Develop content area for `orders`
+### Step 3:
+- [ ] Develop `main_content_area.py`
+- [ ] Develop content area for `parts.py`
 
-*... (and so on, until all sections are complete)*
+### Step 4:
+- [ ] Develop content area for `vehicles.py`
 
-## 7. Testing & Quality Assurance
+### Step 5:
+- [ ] Develop content area for `locations.py`
+
+### Step 6:
+- [ ] Develop content area for `reports.py`
+
+### Step 6:
+- [ ] Develop content area for `operations.py`
+
+
+## 9. Testing & Quality Assurance
 Plan for testing the application to ensure it meets requirements and quality standards.
 
 ### Unit Tests
@@ -83,7 +177,7 @@ Plan for testing the application to ensure it meets requirements and quality sta
 ### Integration Tests
 - Test the application flow from UI interaction to database updates
 
-## 8. Deployment
+## 10. Deployment
 Plan for deploying the application, including any required environment setup.
 
 ### Deployment Steps
