@@ -34,9 +34,11 @@ Utility Files needed for various functions in program.
 
 ### `vehicles_lookup.py`
 - Will query the database for active vehicles and put the in an array for use in other pages dropdown menus.
+  - Query: `select * from active_vehicles`
 
 ### `location_lookup.py`
 - Will query the database for active locations and put the in an array for use in other pages dropdown menus.
+  - Query: `select * from active_locations`
 
 ### `csv.py`
 - Will handle converting mysql results to csv for download
@@ -119,7 +121,19 @@ List of the components for each page that are to be build.
         - The variable `parts_sku` will be the integer entered in the text field
 
 #### `vehicles.py`
-WIP
+- Frame with Dropdown, submit button and treeview.
+  - Dropdown will be populated by array from `vehicle_search.py`
+  - Submit button will take option selected from dropdown and submit the following mysql query: `select * from 'Selected Option'`
+  - Treeview will display results from query
+- Frame with Tabview with the Following options:
+  - Add Vehicle
+    - Will include input field and Submit Button
+      - Input Vehicle will accept string
+      - Submit button will take the string inputted and do the following query: `Insert into active_vehicles ('Vehicle') values ('Input Field String')`
+  - Update Vehicle
+  WIP
+  - Remove Vehicle
+  WIP
 
 #### `locations.py`
 WIP
@@ -128,7 +142,13 @@ WIP
 WIP
 
 #### `operations.py`
-WIP
+- QR Creator
+  - Will include a Input Box and a Submit Button
+    - Input Box will accept string
+    - Submit button will create a static qr code from the string entered in the Input Box
+- Download CSV
+- Upload CSV
+
 
 
 ## 7. Modularity and Code Organization
