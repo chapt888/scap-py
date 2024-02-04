@@ -4,29 +4,33 @@ This section outlines the structure of the database used by the SCAP Frontend Ap
 
 ### Table Descriptions
 
-#### 1. `table_name_1`
-- **Purpose:** Brief description of what this table is used for and how it relates to the system.
+#### 1. `car1`
+- **Purpose:** Hold the parts and information for each part that came from car1.
 - **Fields:**
-  - `field_1`: Description (e.g., unique identifier for records).
-  - `field_2`: Description (e.g., name of the item).
-  - `field_3`: Description (e.g., price of the item).
-- **Relationships:** Description of any foreign keys or relationships to other tables.
+  - `sku`: The Stock Number for each particular part. Primary key and unique identifier for the table. Auto incremented when item added to table
+  - `item_name`: Name for the Part
+  - `mpn`: Part number given to the part by the manufacturer
+  - `location`: Location part is currently stored in
+  - `size`: Dimensions of the part
+  - `weight`: Weight of the part
+  - `quality`: Quality status for the parts
+  - `status`: Wether the part has been listed for sale or not or sold
+  - `sale_price`: Price part sold for
+  - `expense`: Expenses related to part
+  - `profit`: sale_price - expense
+- **Relationships:** In the database testdb. location options are from the `active_locations` table and the table name is from the `active_vehicles` table. There is one of these table for each line of `active_vehicles`.
 
-#### 2. `table_name_2`
-- **Purpose:** Brief description of what this table is used for and how it relates to the system.
+#### 2. `active_locations`
+- **Purpose:** Stores all the active storage locations for parts.
 - **Fields:**
-  - `field_1`: Description (e.g., unique identifier for records).
-  - `field_2`: Description (e.g., type of the vehicle).
-  - `field_3`: Description (e.g., model year of the vehicle).
-- **Relationships:** Description of any foreign keys or relationships to other tables.
+  - `Location`: The name of the storage location.
+- **Relationships:** Used to populate storage location options for program and car tables.
 
-#### 3. `table_name_3`
-- **Purpose:** Brief description of what this table is used for and how it relates to the system.
+#### 3. `active_vehicles`
+- **Purpose:** The currently active vehicles we have parts for.
 - **Fields:**
-  - `field_1`: Description (e.g., unique identifier for records).
-  - `field_2`: Description (e.g., location identifier).
-  - `field_3`: Description (e.g., address of the location).
-- **Relationships:** Description of any foreign keys or relationships to other tables.
+  - `Vehicle`: Name of active vehicle
+- **Relationships:** Populates the dropdowns for the program.
 
 ... (and so on for each table in your database)
 
