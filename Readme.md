@@ -34,11 +34,11 @@ Utility Files needed for various functions in program.
 
 ### `vehicles_lookup.py`
 - Will query the database for active vehicles and put the in an array for use in other pages dropdown menus.
-  - Query: `select * from active_vehicles`
+  - Query: `select * from ActiveVehicles`
 
 ### `location_lookup.py`
 - Will query the database for active locations and put the in an array for use in other pages dropdown menus.
-  - Query: `select * from active_locations`
+  - Query: `select * from Locations`
 
 ### `csv.py`
 - Will handle converting mysql results to csv for download
@@ -77,63 +77,66 @@ Implementation of content area components loading and display logic.
 List of the components for each page that are to be build.
 
 #### `parts.py`
+Search Parts Frame will be to the left and Modify Parts Frame will be to the right.
+**Search Parts Frame**
 - Frame with input field, submit button and treeview.
-  - Input field to accept integer
-  - Submit button will take integer and do a mysql query with following format: `select * from parts_car where 'sku' = 'parts_sku'`
-    - The variable `parts_car` will be created by taking the integer and dropping the last 3 digits and appending 'car' to the beginning, ex: 1232 == car1.
-    - The variable `parts_sku` will be the integer entered in the text field
-  -Treeview will display the results from the mysql query
+  - Input field to accept integer and make variable `parts_sku`
+  - Submit button will take integer and do a mysql query with following format: `select * from Parts where 'PartID' = 'parts_sku'`
+  - Treeview will display the results from the mysql query
+**Modify Parts Frame**
 - Frame with Tabview with the following options:
   - Add Part
     - Will contain the following input and dropdown fields
-      - Dropdown = car_select
-      - Text box = item_name
-      - Text box = mpn
-      - Dropdown = location
-      - Text box = size
-      - Text box = weight
-      - Dropdown = quality
-      - Dropdown = status
-      - Text box = sale_price
-      - Text box = expense
-      - Text box = profit
-      - Submit button to insert the above inputs into a mysql table with "car_select" being the table name.
+      - Dropdown = `VehicleID`
+        - Dropdown options populated from `vehicle_lookup.py` array.
+      - Text box = `Name`
+      - Text box = `PartNumber`
+      - Dropdown = `LocationID`
+        - Dropdown options populated from `location_lookup.py` array.
+      - Text box = `Size`
+      - Text box = `Weight`
+      - Dropdown = `Quality`
+        - Dropdown Options:
+          - Core
+          - Rough
+          - Good
+      - Dropdown = `Status`
+        - Dropdown Options:
+          - Core
+          - Unlisted
+          - Listed
+          - Sold
+      - Submit button to insert the above inputs into the `Parts` table. If any inputs are left blank pass null value.
+    - On submit create messagebox with the lastid.
   - Update Part
     - Will contain the following input and dropdown fields
-      - Dropdown = car_select
-      - Text box = sku
-      - Text box = item_name
-      - Text box = mpn
-      - Dropdown = location
-      - Text box = size
-      - Text box = weight
-      - Dropdown = quality
-      - Dropdown = status
-      - Text box = sale_price
-      - Text box = expense
-      - Text box = profit
-      - Submit button to update the above inputs into a mysql table with "car_select" being the table name and "sku" being the primary key.
+      - Dropdown = `PartID`
+      - Text box = `Name`
+      - Text box = `PartNumber`
+      - Dropdown = `LocationID`
+        - Dropdown options populated from `location_lookup.py` array.
+      - Text box = `Size`
+      - Text box = `Weight`
+      - Dropdown = `Quality`
+        - Dropdown Options:
+          - Core
+          - Rough
+          - Good
+      - Dropdown = `Status`
+        - Dropdown Options:
+          - Core
+          - Unlisted
+          - Listed
+          - Sold
+      - Submit button to update the above inputs into a mysql table `Parts`
   - Remove Part
     - Will contain a Input Field with a submit button
-      - Text Box will accept and integer
-      - Submit button will take integer and do a mysql query with following format: `delete from parts_car where 'sku' = 'parts_sku'`
-        - The variable `parts_car` will be created by taking the integer and dropping the last 3 digits and appending 'car' to the beginning, ex: 1232 == car1.
-        - The variable `parts_sku` will be the integer entered in the text field
+      - Text Box will accept and integer this will be the `PartID` saved as var sku
+      - Submit button will take integer and do a mysql query with following format: `delete from "Parts" where 'PartID' = 'sku'`
+    - On Submit present a message box confirming that you want to delete the `PartID` and on confirm submit the query.
 
 #### `vehicles.py`
-- Frame with Dropdown, submit button and treeview.
-  - Dropdown will be populated by array from `vehicle_search.py`
-  - Submit button will take option selected from dropdown and submit the following mysql query: `select * from 'Selected Option'`
-  - Treeview will display results from query
-- Frame with Tabview with the Following options:
-  - Add Vehicle
-    - Will include input field and Submit Button
-      - Input Vehicle will accept string
-      - Submit button will take the string inputted and do the following query: `Insert into active_vehicles ('Vehicle') values ('Input Field String')`
-  - Update Vehicle
-  WIP
-  - Remove Vehicle
-  WIP
+WIP
 
 #### `locations.py`
 WIP
@@ -159,35 +162,8 @@ Ensure code is organized, modular, and each `.py` file is self-contained.
 - Ensure clear interfaces between different modules
 - Write reusable and well-documented code
 
-## 8. Development Plan
-A checklist or timeline to manage the development process.
 
-### Step 1:
-- [ ] Finalize the project structure
-- [ ] Set up the database connection module
-
-### Step 2:
-- [ ] Develop the basic UI layout and build `main_window.py`
-- [ ] Implement sidebar functionality and build `sidebar.py`
-
-### Step 3:
-- [ ] Develop `main_content_area.py`
-- [ ] Develop content area for `parts.py`
-
-### Step 4:
-- [ ] Develop content area for `vehicles.py`
-
-### Step 5:
-- [ ] Develop content area for `locations.py`
-
-### Step 6:
-- [ ] Develop content area for `reports.py`
-
-### Step 6:
-- [ ] Develop content area for `operations.py`
-
-
-## 9. Testing & Quality Assurance
+## 8. Testing & Quality Assurance
 Plan for testing the application to ensure it meets requirements and quality standards.
 
 ### Unit Tests
@@ -197,7 +173,7 @@ Plan for testing the application to ensure it meets requirements and quality sta
 ### Integration Tests
 - Test the application flow from UI interaction to database updates
 
-## 10. Deployment
+## 19. Deployment
 Plan for deploying the application, including any required environment setup.
 
 ### Deployment Steps

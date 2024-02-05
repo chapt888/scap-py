@@ -9,6 +9,7 @@
 - **Make** (VARCHAR): The manufacturer of the vehicle.
 - **Model** (VARCHAR): The model of the vehicle.
 - **Trim** (VARCHAR): The specific version or configuration of the model.
+- **VIN** (VARCHAR): VIN number of vehicle
 
 ### 2. Parts
 - **PartID** (INT, Primary Key): A unique identifier for each part.
@@ -16,6 +17,11 @@
 - **Name** (VARCHAR): The name or description of the part.
 - **PartNumber** (VARCHAR): An identifier or number given to the part, if applicable.
 - **LocationID** (INT, Foreign Key): The identifier of the location where the part is stored.
+- **Size** (VARCHAR): The Dimensions of the part.
+- **Weight** (VARCHAR): The Weight of the part.
+- **Quality** (VARCHAR): The Quality of the part.
+- **Status** (VARCHAR): The current Status of the part.
+- **PartSequence** (INT): Counter for PartID Trigger
 
 ### 3. Locations
 - **LocationID** (INT, Primary Key): A unique identifier for each location.
