@@ -47,6 +47,9 @@
 - **Amount** (DECIMAL): The monetary value of the cost.
 - **DateIncurred** (DATE): The date the cost was incurred.
 
+### 7. ActiveVehicles
+- **ActiveVehicle** (VARCHAR): Contains Vehicles Currently Active
+
 ## Relationships
 - **Vehicles to Parts**: One-to-Many (One vehicle can have many parts, but each part comes from one specific vehicle).
 - **Parts to Locations**: Many-to-One (Many parts can be stored in one location, but each part is stored in one specific location).
